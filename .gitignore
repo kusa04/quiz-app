@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# 環境変数（.env.example はコミットする）
+.env
+.env.*
+!.env.example
+
+# エディタ
+.idea/
