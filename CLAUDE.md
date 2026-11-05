@@ -47,13 +47,15 @@ MVP の要件は `docs/mvp.md` にある。仕様に関わる質問や実装の�
 リポジトリ直下の `Makefile` が入口。`make help` で一覧が出る。
 
 ```bash
-make setup    # 依存関係をインストール
+make setup    # 依存関係をインストールし、git フックを有効にする
 make mobile   # Expo 開発サーバー（Expo Go で QR を読む）
 make web      # Expo をブラウザで起動
 make server   # Go サーバーをホットリロードで起動（server/cmd/api/main.go が必要）
-make check    # lint + 型チェック + テスト。コミット前に実行する
+make check    # lint + 型チェック + テスト。git push の前に自動で走る
 make fmt      # Go コードを整形
 ```
+
+`git push` の直前に、`.githooks/pre-push` が `make check` を実行する。失敗すると push は中止される。フックは `make setup` で有効になる（`git config core.hooksPath .githooks`）。
 
 `server/` に Go ファイルが 1 つも無い間は、`make lint` / `make test` の server 側はスキップされる。
 

@@ -1,3 +1,4 @@
+// Package mainはbackendのmainパッケージである
 package main
 
 import (
@@ -11,8 +12,8 @@ func main() {
 	mux := http.NewServeMux()
 
 	// routingの登録
-	mux.HandleFunc("/demo", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "Hello, this is a demo endpoint !!")
+	mux.HandleFunc("/demo", func(w http.ResponseWriter, _ *http.Request) {
+		fmt.Println(w, "Hello, this is a demo endpoint !!")
 	})
 
 	// サーバーの起動してmuxを渡す
