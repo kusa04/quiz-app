@@ -14,9 +14,10 @@ SKIP_GO   = @echo "server: Go ファイルがまだ無いのでスキップ"
 help: ## コマンド一覧を表示
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{printf "  make %-8s %s\n", $$1, $$2}'
 
-setup: ## 依存関係をインストール
+setup: ## 依存関係をインストールし、git フックを有効にする
 	cd mobile && npm install
 	cd server && go mod download
+	git config core.hooksPath .githooks
 
 mobile: ## Expo 開発サーバーを起動（Expo Go で QR を読む）
 	cd mobile && npx expo start
@@ -46,4 +47,4 @@ endif
 fmt: ## Go コードを整形
 	cd server && $(GOLANGCI) fmt ./...
 
-check: lint test ## lint + テスト（コミット前に実行）
+check: lint test ## lint + テスト（git push の前に自動で走る）

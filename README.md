@@ -26,11 +26,11 @@
 ## 使い方
 
 ```bash
-make setup    # 依存関係をインストール
+make setup    # 依存関係をインストールし、git フックを有効にする
 make mobile   # Expo 開発サーバーを起動し、表示された QR を Expo Go で読む
 make web      # ブラウザで起動
 make server   # Go サーバーをホットリロードで起動
-make check    # lint + 型チェック + テスト
+make check    # lint + 型チェック + テスト。git push の前に自動で走る
 ```
 
 `make help` で全コマンドを表示する。
